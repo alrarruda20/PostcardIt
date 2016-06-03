@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h3>Recipient #<%= @recipient.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Photo</dt>
+      <dd><%= @recipient.photo_id %></dd>
+
+      <dt>User</dt>
+      <dd><%= @recipient.user_id %></dd>
+
+      <dt>Address</dt>
+      <dd><%= @recipient.address %></dd>
+
+      <dt>Name</dt>
+      <dd><%= @recipient.name %></dd>
+
+      <dt>Email</dt>
+      <dd><%= @recipient.email %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/recipients" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/recipients/<%= @recipient.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_recipient/<%= @recipient.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
