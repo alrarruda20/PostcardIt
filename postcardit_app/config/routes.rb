@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # Routes for the Photo resource:
   # CREATE
+  
   get "/photos/new", :controller => "photos", :action => "new"
   post "/create_photo", :controller => "photos", :action => "create"
 
