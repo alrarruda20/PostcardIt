@@ -1,7 +1,36 @@
 Rails.application.routes.draw do
+
+  devise_for :users
+  root "photos#index"
+
+  get "/my_photos", :controller => "photos", :action => "my_photos"
+  get "/my_timeline", :controller => "photos", :action => "my_timeline"
+
+  # Routes for the User resource:
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
+  # Routes for the Postcard resource:
+  # CREATE
+  get "/postcards/new", :controller => "postcards", :action => "new"
+  post "/create_postcard", :controller => "postcards", :action => "create"
+
+  # READ
+  get "/postcards", :controller => "postcards", :action => "index"
+  get "/postcards/:id", :controller => "postcards", :action => "show"
+
+  # UPDATE
+  get "/postcards/:id/edit", :controller => "postcards", :action => "edit"
+  post "/update_postcard/:id", :controller => "postcards", :action => "update"
+
+  # DELETE
+  get "/delete_postcard/:id", :controller => "postcards", :action => "destroy"
+  #------------------------------
+
   # Routes for the Photo resource:
   # CREATE
-  
+
   get "/photos/new", :controller => "photos", :action => "new"
   post "/create_photo", :controller => "photos", :action => "create"
 
@@ -34,7 +63,8 @@ Rails.application.routes.draw do
   get "/delete_recipient/:id", :controller => "recipients", :action => "destroy"
   #------------------------------
 
-  devise_for :users
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

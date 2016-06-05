@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h3>Postcard #<%= @postcard.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Message</dt>
+      <dd><%= @postcard.message %></dd>
+
+      <dt>Photo</dt>
+      <dd><%= @postcard.photo_id %></dd>
+
+      <dt>Recipient</dt>
+      <dd><%= @postcard.recipient_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/postcards" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/postcards/<%= @postcard.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_postcard/<%= @postcard.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,12 @@
 class PhotosController < ApplicationController
+  def my_photos
+    @photos = current_user.photos
+  end
+
+  def my_timeline
+    @photos = current_user.timeline_photos
+  end
+
   def index
     @photos = Photo.all
   end

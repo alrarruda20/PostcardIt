@@ -1,40 +1,19 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
-
+<%= render @photo %>
 <div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Title</dt>
-      <dd><%= @photo.title %></dd>
+<div class="col-md-8 col-md-offset-2">
 
-      <dt>Description</dt>
-      <dd><%= @photo.description %></dd>
-
-      <dt>Location</dt>
-      <dd><%= @photo.location %></dd>
-
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
-
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
-
-      <dt>Taken at</dt>
-      <dd><%= @photo.taken_at %></dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/photos" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
-    </div>
-  </div>
+<div class="btn-group btn-group-justified">
+  <a href="/photos" class="btn btn-primary">
+    <i class="fa fa-chevron-left"></i>
+  </a>
+  <% if current_user.id == @photo.user_id %>
+    <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+      <i class="fa fa-edit"></i>
+    </a>
+    <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+      <i class="fa fa-trash-o"></i>
+    </a>
+  <% end %>
+</div>
+</div>
 </div>

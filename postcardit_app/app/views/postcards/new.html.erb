@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @postcard.errors.any? %>
+  <% @postcard.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Postcard</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_postcard" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for message -->
+      <div class="form-group">
+        <label for="message" class="control-label">
+          Message
+        </label>
+
+        <textarea id="message" name="message" placeholder="Message" class="form-control" rows="3"><%= @postcard.message %></textarea>
+      </div>
+
+      <!-- Label and input for photo_id -->
+      <div class="form-group">
+        <label for="photo_id" class="control-label">
+          Photo
+        </label>
+
+        <input type="text" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @postcard.photo_id %>">
+      </div>
+
+      <!-- Label and input for recipient_id -->
+      <div class="form-group">
+        <label for="recipient_id" class="control-label">
+          Recipient
+        </label>
+
+        <input type="text" id="recipient_id" name="recipient_id" placeholder="Recipient" class="form-control" value="<%= @postcard.recipient_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Postcard
+      </button>
+      or
+      <a href="/postcards">Cancel</a>
+    </form>
+  </div>
+</div>

@@ -1,10 +1,12 @@
 class CreatePostcards < ActiveRecord::Migration
   def change
     create_table :postcards do |t|
-      t.string :title
-      t.text :description
+      t.text :message
+      t.integer :photo_id
+      t.integer :recipient_id
 
-      t.timestamps null: false
+      t.timestamps
+
     end
   end
 end
