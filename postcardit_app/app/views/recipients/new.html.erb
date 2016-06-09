@@ -18,23 +18,17 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for photo_id -->
-      <div class="form-group">
-        <label for="photo_id" class="control-label">
-          Photo
-        </label>
-
-        <input type="text" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @recipient.photo_id %>">
-      </div>
-
       <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
+    <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @recipient.user_id %>">
-      </div>
+    <!-- Label and input for name -->
+    <div class="form-group">
+      <label for="name" class="control-label">
+        Name
+      </label>
+
+      <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @recipient.name %>">
+    </div>
 
       <!-- Label and input for address -->
       <div class="form-group">
@@ -43,15 +37,6 @@
         </label>
 
         <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%= @recipient.address %>">
-      </div>
-
-      <!-- Label and input for name -->
-      <div class="form-group">
-        <label for="name" class="control-label">
-          Name
-        </label>
-
-        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @recipient.name %>">
       </div>
 
       <!-- Label and input for email -->

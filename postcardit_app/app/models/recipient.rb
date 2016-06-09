@@ -1,8 +1,10 @@
 class Recipient < ActiveRecord::Base
-  belongs_to :sender, :class_name => "User", :foreign_key => "sender_id"
+  belongs_to :user
 
-  belongs_to :receiver, :class_name => "User", :foreign_key => "receiver_id"
+  has_many :postcards
 
-  validates :sender, :presence => true, :uniqueness => { :scope => :receiver }
-  validates :receiver, :presence => true
+  validates :user, :presence => true
+  validates :address, :presence => true
+
+  default_scope { order("created_at DESC") }
 end

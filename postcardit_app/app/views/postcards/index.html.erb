@@ -1,32 +1,41 @@
-<div class="page-header">
-  <h1>
+<div class="col-md-8 col-md-offset-4" class="page-header">
+  <h2>
     Postcards
-    <a href="/postcards/new" class="btn btn-lg btn-success">New Postcard</a>
-  </h1>
+
+  </h2>
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 col-md-8 col-md-offset-2">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Message</th>
-        <th>Photo</th>
         <th>Recipient</th>
-        <th>Actions</th>
+        <th>Photo</th>
+        <th>Message</th>
+        <th>Sent</th>
+        <th> </th>
       </tr>
 
       <% @postcards.each do |postcard| %>
       <tr>
-        <td><%= postcard.message %></td>
-        <td><%= postcard.photo_id %></td>
         <td><%= postcard.recipient_id %></td>
+        <td><%= postcard.photo_id %></td>
+        <td><%= postcard.message %></td>
+        <td><%= time_ago_in_words(postcard.created_at) %> ago
+        </td>
+
         <td>
-          <a href="/postcards/<%= postcard.id %>" class="btn btn-primary">Show</a>
-          <a href="/postcards/<%= postcard.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_postcard/<%= postcard.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <a href="/postcards/<%= postcard.id %>" class="btn btn-default">View</a>
         </td>
       </tr>
       <% end %>
     </table>
+  </div>
+  <div class="col-md-8 col-md-offset-2">
+    <a href="/postcards/new" class="btn btn-primary btn-block">
+      Send a Postcard :)
+    </a>
+
+    <hr>
   </div>
 </div>

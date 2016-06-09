@@ -13,7 +13,6 @@ class RecipientsController < ApplicationController
 
   def create
     @recipient = Recipient.new
-    @recipient.photo_id = params[:photo_id]
     @recipient.user_id = params[:user_id]
     @recipient.address = params[:address]
     @recipient.name = params[:name]

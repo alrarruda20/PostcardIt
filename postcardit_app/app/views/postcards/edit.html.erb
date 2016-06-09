@@ -9,14 +9,33 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Postcard #<%= @postcard.id %></h3>
+  <h3>Edit Postcard </h3>
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <form action="/update_postcard/<%= @postcard.id %>" method="post">
+
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for photo_id -->
+      <div class="form-group">
+        <label for="photo_id" class="control-label">
+          Photo
+        </label>
+
+          <%= select_tag(:photo_id, options_from_collection_for_select(Photo.all, :id, :title, @postcard.photo_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for recipient_id -->
+      <div class="form-group">
+        <label for="recipient_id" class="control-label">
+          Recipient
+        </label>
+
+          <%= select_tag(:recipient_id, options_from_collection_for_select(Recipient.all, :id, :name, @postcard.recipient_id), :class => "form-control") %>
+      </div>
 
       <!-- Label and input for message -->
       <div class="form-group">
@@ -27,25 +46,9 @@
         <textarea id="message" name="message" placeholder="Message" class="form-control" rows="3"><%= @postcard.message %></textarea>
       </div>
 
-      <!-- Label and input for photo_id -->
-      <div class="form-group">
-        <label for="photo_id" class="control-label">
-          Photo
-        </label>
 
-        <input type="text" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @postcard.photo_id %>">
-      </div>
 
-      <!-- Label and input for recipient_id -->
-      <div class="form-group">
-        <label for="recipient_id" class="control-label">
-          Recipient
-        </label>
-
-        <input type="text" id="recipient_id" name="recipient_id" placeholder="Recipient" class="form-control" value="<%= @postcard.recipient_id %>">
-      </div>
-
-      <button class="btn btn-warning">
+      <button class="btn btn-success">
         Update Postcard
       </button>
       or

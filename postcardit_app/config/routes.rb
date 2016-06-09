@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  root "photos#index"
+  # Routes for the Recipient resource:
+  # CREATE
+  get "/recipients/new", :controller => "recipients", :action => "new"
+  post "/create_recipient", :controller => "recipients", :action => "create"
 
-  get "/my_photos", :controller => "photos", :action => "my_photos"
-  get "/my_timeline", :controller => "photos", :action => "my_timeline"
-
-  # Routes for the User resource:
   # READ
-  get "/users", :controller => "users", :action => "index"
-  get "/users/:id", :controller => "users", :action => "show"
+  get "/recipients", :controller => "recipients", :action => "index"
+  get "/recipients/:id", :controller => "recipients", :action => "show"
+
+  # UPDATE
+  get "/recipients/:id/edit", :controller => "recipients", :action => "edit"
+  post "/update_recipient/:id", :controller => "recipients", :action => "update"
+
+  # DELETE
+  get "/delete_recipient/:id", :controller => "recipients", :action => "destroy"
+  #------------------------------
 
   # Routes for the Postcard resource:
   # CREATE
@@ -28,6 +34,22 @@ Rails.application.routes.draw do
   get "/delete_postcard/:id", :controller => "postcards", :action => "destroy"
   #------------------------------
 
+  devise_for :users
+  root "photos#index"
+
+  get "/my_photos", :controller => "photos", :action => "my_photos"
+  get "/my_timeline", :controller => "photos", :action => "my_timeline"
+
+  get "/my_recipients", :controller => "recipients", :action => "my_recpients"
+  get "/my_timeline", :controller => "recipients", :action => "my_recipients"
+
+
+
+  # Routes for the User resource:
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
   # Routes for the Photo resource:
   # CREATE
 
@@ -44,23 +66,6 @@ Rails.application.routes.draw do
 
   # DELETE
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
-  #------------------------------
-
-  # Routes for the Recipient resource:
-  # CREATE
-  get "/recipients/new", :controller => "recipients", :action => "new"
-  post "/create_recipient", :controller => "recipients", :action => "create"
-
-  # READ
-  get "/recipients", :controller => "recipients", :action => "index"
-  get "/recipients/:id", :controller => "recipients", :action => "show"
-
-  # UPDATE
-  get "/recipients/:id/edit", :controller => "recipients", :action => "edit"
-  post "/update_recipient/:id", :controller => "recipients", :action => "update"
-
-  # DELETE
-  get "/delete_recipient/:id", :controller => "recipients", :action => "destroy"
   #------------------------------
 
 

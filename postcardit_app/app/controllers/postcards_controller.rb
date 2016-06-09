@@ -30,7 +30,6 @@ class PostcardsController < ApplicationController
 
   def update
     @postcard = Postcard.find(params[:id])
-
     @postcard.message = params[:message]
     @postcard.photo_id = params[:photo_id]
     @postcard.recipient_id = params[:recipient_id]

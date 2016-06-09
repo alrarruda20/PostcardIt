@@ -17,14 +17,14 @@
     </dl>
 
     <div class="btn-group btn-group-justified">
-      <a href="/postcards" class="btn btn-primary">
-        Back
+      <a href="/postcards" class="btn btn-default">
+        <i class="fa fa-chevron-left"></i>
       </a>
-      <a href="/postcards/<%= @postcard.id %>/edit" class="btn btn-warning">
-        Edit
+      <a href="/postcards/<%= @postcard.id %>/edit" class="btn btn-default">
+        <i class="fa fa-edit"></i>
       </a>
-      <a href="/delete_postcard/<%= @postcard.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
+      <a href="/delete_postcard/<%= @postcard.id %>" class="btn btn-default" rel="nofollow">
+        <i class="fa fa-trash-o"></i>
       </a>
     </div>
   </div>

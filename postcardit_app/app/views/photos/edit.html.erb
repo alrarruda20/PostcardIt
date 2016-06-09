@@ -1,3 +1,5 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
 <!-- Validation failure messages -->
 <% if @photo.errors.any? %>
   <% @photo.errors.full_messages.each do |message| %>
@@ -8,15 +10,57 @@
   <% end %>
 <% end %>
 
-<div class="page-header">
-  <h3>Edit Photo #<%= @photo.id %></h3>
-</div>
 
-<div class="row">
-  <div class="col-md-12">
-    <form action="/update_photo/<%= @photo.id %>" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+   <!-- Load widget code -->
+   <script type="text/javascript" src="http://feather.aviary.com/imaging/v3/editor.js"></script>
+
+   <!-- Instantiate the widget -->
+
+
+   <script type="text/javascript">
+
+       var featherEditor = new Aviary.Feather({
+           apiKey: 'feaebd5dc5fd411c970a49b33a9ca21c',
+           tools: ['enhance', 'effects', 'frames', 'overlays', 'orientation', 'stickers', 'crop', 'resize', 'lighting', 'color', 'sharpness', 'focus', 'vignette', 'blemish', 'whiten', 'redeye', 'draw', 'colorsplash', 'text', 'meme'],
+           onSave: function(imageID, newURL) {
+               var img = document.getElementById(imageID);
+               img.src = newURL;
+               featherEditor.close()
+
+           }
+       });
+
+       function launchEditor(id, src) {
+           featherEditor.launch({
+               image: id,
+               url: src
+           });
+           return false;
+       }
+
+   </script>
+
+
+   <!-- original line of HTML here: -->
+   <div class="form-group">
+   <img id="editableimage1" src="<%= @photo.image %>" class="img-responsive"/>
+ </div>
+
+   <!-- Add an edit button, passing the HTML id of the image
+       and the public URL to the image -->
+
+  <div class="form-group">
+   <a href="#" onclick="return launchEditor('editableimage1',
+       '<%= @photo.image %>');" class="btn btn-primary btn-block">Edit Photo!</a>
+  </div>
+
+      <div class="panel-body">
+        <form action="/update_photo/<%= @photo.id %>" method="post">
+
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
 
       <!-- Label and input for title -->
       <div class="form-group">
@@ -46,37 +90,28 @@
       </div>
 
       <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
+    <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @photo.user_id %>">
+      <div class="form-group">
+            <button class="btn btn-success btn-block">
+              Update Photo
+            </button>
       </div>
 
-      <!-- Label and input for image -->
-      <div class="form-group">
-        <label for="image" class="control-label">
-          Image
-        </label>
 
-        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @photo.image %>">
+
+      <div class="btn-group btn-group-justified">
+        <a href="/photos" class="btn btn-default btn-block">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+
+        <% if current_user.id == @photo.user_id %>
+          <a href="/delete_photo/<%= @photo.id %>" class="btn btn-default btn-block" rel="nofollow">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        <% end %>
       </div>
 
-      <!-- Label and input for taken_at -->
-      <div class="form-group">
-        <label for="taken_at" class="control-label">
-          Taken at
-        </label>
-
-        <input type="text" id="taken_at" name="taken_at" placeholder="Taken at" class="form-control" value="<%= @photo.taken_at %>">
-      </div>
-
-      <button class="btn btn-warning">
-        Update Photo
-      </button>
-      or
-      <a href="/photos/<%= @photo.id %>">Cancel</a>
     </form>
   </div>
 </div>
