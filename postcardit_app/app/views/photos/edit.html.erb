@@ -1,117 +1,127 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-<!-- Validation failure messages -->
-<% if @photo.errors.any? %>
-  <% @photo.errors.full_messages.each do |message| %>
+    <!-- Validation failure messages -->
+    <% if @photo.errors.any? %>
+    <% @photo.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <%= message %>
     </div>
-  <% end %>
-<% end %>
+    <% end %>
+    <% end %>
 
 
 
-   <!-- Load widget code -->
-   <script type="text/javascript" src="http://feather.aviary.com/imaging/v3/editor.js"></script>
+    <!-- Load widget code -->
+    <script type="text/javascript" src="http://feather.aviary.com/imaging/v3/editor.js"></script>
 
-   <!-- Instantiate the widget -->
-
-
-   <script type="text/javascript">
-
-       var featherEditor = new Aviary.Feather({
-           apiKey: 'feaebd5dc5fd411c970a49b33a9ca21c',
-           tools: ['enhance', 'effects', 'frames', 'overlays', 'orientation', 'stickers', 'crop', 'resize', 'lighting', 'color', 'sharpness', 'focus', 'vignette', 'blemish', 'whiten', 'redeye', 'draw', 'colorsplash', 'text', 'meme'],
-           onSave: function(imageID, newURL) {
-               var img = document.getElementById(imageID);
-               img.src = newURL;
-               featherEditor.close()
-
-           }
-       });
-
-       function launchEditor(id, src) {
-           featherEditor.launch({
-               image: id,
-               url: src
-           });
-           return false;
-       }
-
-   </script>
+    <!-- Instantiate the widget -->
 
 
-   <!-- original line of HTML here: -->
-   <div class="form-group">
-   <img id="editableimage1" src="<%= @photo.image %>" class="img-responsive"/>
- </div>
+    <script type="text/javascript">
 
-   <!-- Add an edit button, passing the HTML id of the image
-       and the public URL to the image -->
+    var featherEditor = new Aviary.Feather({
+      apiKey: 'feaebd5dc5fd411c970a49b33a9ca21c',
+      tools: ['enhance', 'effects', 'frames', 'overlays', 'orientation', 'stickers', 'crop', 'resize', 'lighting', 'color', 'sharpness', 'focus', 'vignette', 'blemish', 'whiten', 'redeye', 'draw', 'colorsplash', 'text', 'meme'],
+      onSave: function(imageID, newURL) {
+        var img = document.getElementById(imageID);
+        img.src = newURL;
+        featherEditor.close()
 
-  <div class="form-group">
-   <a href="#" onclick="return launchEditor('editableimage1',
-       '<%= @photo.image %>');" class="btn btn-primary btn-block">Edit Photo!</a>
-  </div>
+      }
+    });
 
-      <div class="panel-body">
-        <form action="/update_photo/<%= @photo.id %>" method="post">
+    function launchEditor(id, src) {
+      featherEditor.launch({
+        image: id,
+        url: src
+      });
+      return false;
+    }
 
-          <!-- Hidden input for authenticity token to protect from forgery -->
-          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-
-      <!-- Label and input for title -->
-      <div class="form-group">
-        <label for="title" class="control-label">
-          Title
-        </label>
-
-        <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @photo.title %>">
-      </div>
-
-      <!-- Label and input for description -->
-      <div class="form-group">
-        <label for="description" class="control-label">
-          Description
-        </label>
-
-        <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @photo.description %></textarea>
-      </div>
-
-      <!-- Label and input for location -->
-      <div class="form-group">
-        <label for="location" class="control-label">
-          Location
-        </label>
-
-        <input type="text" id="location" name="location" placeholder="Location" class="form-control" value="<%= @photo.location %>">
-      </div>
-
-      <!-- Label and input for user_id -->
-    <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
-
-      <div class="form-group">
-            <button class="btn btn-success btn-block">
-              Update Photo
-            </button>
-      </div>
+    </script>
 
 
+    <!-- original line of HTML here: -->
+    <div class="form-group">
+      <img id="editableimage1" src="<%= @photo.image %>" class="img-responsive"/>
+    </div>
 
-      <div class="btn-group btn-group-justified">
-        <a href="/photos" class="btn btn-default btn-block">
-          <i class="fa fa-chevron-left"></i>
-        </a>
+    <!-- Add an edit button, passing the HTML id of the image
+    and the public URL to the image -->
 
-        <% if current_user.id == @photo.user_id %>
+    <div class="form-group">
+      <a href="#" onclick="return launchEditor('editableimage1',
+      '<%= @photo.image %>');" class="btn btn-primary btn-block">Edit Photo!</a>
+    </div>
+
+    <div class="panel-body">
+      <form action="/update_photo/<%= @photo.id %>" method="post">
+
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+
+        <!-- Label and input for image -->
+        <div class="form-group">
+          <label for="image" class="control-label">
+            Change Image
+          </label>
+
+          <input type="file" id="image" name="image" placeholder="Add a URL..." class="form-control" value="<%= @photo.image %>">
+        </div>
+
+
+        <!-- Label and input for title -->
+        <div class="form-group">
+          <label for="title" class="control-label">
+            Title
+          </label>
+
+          <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @photo.title %>">
+        </div>
+
+        <!-- Label and input for description -->
+        <div class="form-group">
+          <label for="description" class="control-label">
+            Description
+          </label>
+
+          <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @photo.description %></textarea>
+        </div>
+
+        <!-- Label and input for location -->
+        <div class="form-group">
+          <label for="location" class="control-label">
+            Location
+          </label>
+
+          <input type="text" id="location" name="location" placeholder="Location" class="form-control" value="<%= @photo.location %>">
+        </div>
+
+        <!-- Label and input for user_id -->
+        <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
+
+        <div class="form-group">
+          <button class="btn btn-success btn-block">
+            Update Photo
+          </button>
+        </div>
+
+
+
+        <div class="btn-group btn-group-justified">
+          <a href="/photos" class="btn btn-default btn-block">
+            <i class="fa fa-chevron-left"></i>
+          </a>
+
+          <% if current_user.id == @photo.user_id %>
           <a href="/delete_photo/<%= @photo.id %>" class="btn btn-default btn-block" rel="nofollow">
             <i class="fa fa-trash-o"></i>
           </a>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
 
-    </form>
+      </form>
+    </div>
   </div>
-</div>

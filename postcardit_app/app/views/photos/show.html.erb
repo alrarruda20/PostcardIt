@@ -32,6 +32,16 @@
       <input type="text" id="location" name="location" placeholder="Location" class="form-control" value="<%= @photo.location %>">
     </div>
 
+    <!-- Postcards sent -->
+    <dt>Postcards sent to recipient:</dt>
+    <dd><% @photo.postcards.each do |recipient| %>
+      <%= recipient.recipient_id %>
+
+    <% end %>
+  </dd>
+
+
+
     <!-- Label and input for user_id -->
     <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
 

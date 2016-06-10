@@ -2,7 +2,7 @@ class Postcard < ActiveRecord::Base
 belongs_to :user
 belongs_to :photo
 
-has_many :recipients
+belongs_to :recipient
 
 validates :photo, :presence => true
 validates :message, :presence => true

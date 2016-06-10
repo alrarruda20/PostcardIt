@@ -15,6 +15,15 @@
       <dt>Email</dt>
       <dd><%= @recipient.email %></dd>
 
+      <dt>Postcards sent</dt>
+      <dd><% @recipient.postcards.each do |postcard| %>
+        <%= postcard.photo_id %>
+
+      <% end %>
+    </dd>
+
+
+
     </dl>
 
 

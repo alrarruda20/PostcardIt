@@ -2,7 +2,7 @@ class Photo < ActiveRecord::Base
 
 belongs_to :user
 has_many :postcards, :dependent => :destroy
-has_many :recipients, :through => :postcards, :source => :user
+has_many :recipients, :through => :postcards
 
 validates :user, :presence => true
 validates :image, :presence => true

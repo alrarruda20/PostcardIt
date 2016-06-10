@@ -1,11 +1,11 @@
 <!-- Validation failure messages -->
 <% if @postcard.errors.any? %>
-  <% @postcard.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @postcard.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="page-header">
@@ -25,7 +25,7 @@
           Photo
         </label>
 
-          <%= select_tag(:photo_id, options_from_collection_for_select(Photo.all, :id, :title, @postcard.photo_id), :class => "form-control") %>
+        <%= select_tag(:photo_id, options_from_collection_for_select(Photo.all, :id, :title, @postcard.photo_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for recipient_id -->
@@ -34,7 +34,7 @@
           Recipient
         </label>
 
-          <%= select_tag(:recipient_id, options_from_collection_for_select(Recipient.all, :id, :name, @postcard.recipient_id), :class => "form-control") %>
+        <%= select_tag(:recipient_id, options_from_collection_for_select(Recipient.all, :id, :name, @postcard.recipient_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for message -->
@@ -46,6 +46,7 @@
         <textarea id="message" name="message" placeholder="Message" class="form-control" rows="3"><%= @postcard.message %></textarea>
       </div>
 
+      <!--Postcard mailed? -->
 
 
       <button class="btn btn-success">

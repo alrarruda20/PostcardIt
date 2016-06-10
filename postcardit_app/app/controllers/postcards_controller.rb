@@ -34,6 +34,7 @@ class PostcardsController < ApplicationController
     @postcard.photo_id = params[:photo_id]
     @postcard.recipient_id = params[:recipient_id]
 
+
     if @postcard.save
       redirect_to "/postcards", :notice => "Postcard updated successfully."
     else
